@@ -1,40 +1,78 @@
-﻿using ByteBank.Funcionarios;
-using System;
-
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ByteBank
 {
     class Program
-    {      
+    {
         static void Main(string[] args)
         {
-            GerenciadorBonificacao gerenciador = new GerenciadorBonificacao();
+            try
+            {                
+                ContaCorrente conta = new ContaCorrente(456, 452158);
+                ContaCorrente conta2 = new ContaCorrente(485, 6546512);
+                conta2.Transferir(-10, conta);
 
-            Designer pedro = new Designer("833.222.048-39");
-            pedro.Nome = "Pedro";
+                conta.Depositar(50);
+                Console.WriteLine(conta.Saldo);
+                conta.Sacar(500);
+            }
+            catch (ArgumentException ex)
+            {
+                if(ex.ParamName == "numero")
+                {
+                    
+                }
 
-            Diretor roberta = new Diretor("159.753.398-04");
-            roberta.Nome = "Roberta";
+                Console.WriteLine("Argumento com problema: " + ex.ParamName);
+                Console.WriteLine("Ocorreu uma exceção do tipo ArgumentException");
+                Console.WriteLine(ex.Message);
+            }
+            catch(SaldoInsuficienteException ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Exceção do tipo SaldoInsuficienteException");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
+            //Metodo();
 
-            Auxiliar igor = new Auxiliar("981.198.778-53");
-            igor.Nome = "Igor";
-
-            GerenteDeConta camila = new GerenteDeConta("326.985.628-89");
-            camila.Nome = "Camila";
-
-            Desenvolvedor guilherme = new Desenvolvedor("234.654.321-50");
-            guilherme.Nome = "Guilherme";
-
-            ParceiroComercial parceiro = new ParceiroComercial();
-            parceiro.Senha = "123456";
-            sistemaInterno.Logar(parceiro, "123456");
-
-            gerenciador.Registrar(pedro);
-            gerenciador.Registrar(roberta);
-            gerenciador.Registrar(igor);
-            gerenciador.Registrar(camila);
-
-            Console.WriteLine("Total de bonificaçõesdo mês " + gerenciador.GetTotalBonificacao());
+            Console.WriteLine("Execução finalizada. Tecle enter para sair");
+            Console.ReadLine();
         }
+
+        // Teste com a cadeia de chamada:
+        // Metodo -> TestaDivisao -> Dividir
+        private static void Metodo()
+        {
+            TestaDivisao(0);
+        }
+
+        private static void TestaDivisao(int divisor)
+        {
+            int resultado = Dividir(10, divisor);
+            Console.WriteLine("Resultado da divisão de 10 por " + divisor + " é " + resultado);
+        }
+
+        private static int Dividir(int numero, int divisor)
+        {
+            try
+            {
+                return numero / divisor;
+            }
+            catch (DivideByZeroException)
+            {
+                Console.WriteLine("Exceção com numero=" + numero + " e divisor=" + divisor);
+                throw;
+                Console.WriteLine("Código depois do throw");
+            }
+        }
+
     }
 }
