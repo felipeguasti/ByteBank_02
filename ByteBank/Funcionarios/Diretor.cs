@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ByteBank.Sistemas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,15 @@ using System.Threading.Tasks;
 
 namespace ByteBank.Funcionarios
 {   
-    public class Diretor : Funcionario
+    public class Diretor : FuncionarioAutenticavel 
     {
         public Diretor(string cpf) : base(5000, cpf)
         {
             Console.WriteLine("Criando Diretor " + this.Nome);
+        }
+        public bool Autenticar(string senha)
+        {
+            return true;
         }
 
         public override void AumentarSalario()

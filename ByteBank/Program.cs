@@ -25,6 +25,10 @@ namespace ByteBank
             Desenvolvedor guilherme = new Desenvolvedor("234.654.321-50");
             guilherme.Nome = "Guilherme";
 
+            ParceiroComercial parceiro = new ParceiroComercial();
+            parceiro.Senha = "123456";
+            sistemaInterno.Logar(parceiro, "123456");
+
             gerenciador.Registrar(pedro);
             gerenciador.Registrar(roberta);
             gerenciador.Registrar(igor);
