@@ -5,22 +5,32 @@ using System;
 namespace ByteBank
 {
     class Program
-    {
+    {      
         static void Main(string[] args)
         {
-            Funcionario carlos = new Funcionario();
+            GerenciadorBonificacao gerenciador = new GerenciadorBonificacao();
 
-            carlos.Nome = "Carlos";
-            carlos.CPF = "542.879.965-20";
-            carlos.Salario = 2000;
+            Designer pedro = new Designer("833.222.048-39");
+            pedro.Nome = "Pedro";
 
-            Diretor roberta = new Diretor();
+            Diretor roberta = new Diretor("159.753.398-04");
             roberta.Nome = "Roberta";
-            roberta.CPF = "454.568.523-85";
-            roberta.Salario = 5000;
 
-            Console.WriteLine(roberta.Nome);
-            Console.WriteLine(roberta.GetBonificacao());
+            Auxiliar igor = new Auxiliar("981.198.778-53");
+            igor.Nome = "Igor";
+
+            GerenteDeConta camila = new GerenteDeConta("326.985.628-89");
+            camila.Nome = "Camila";
+
+            Desenvolvedor guilherme = new Desenvolvedor("234.654.321-50");
+            guilherme.Nome = "Guilherme";
+
+            gerenciador.Registrar(pedro);
+            gerenciador.Registrar(roberta);
+            gerenciador.Registrar(igor);
+            gerenciador.Registrar(camila);
+
+            Console.WriteLine("Total de bonificaçõesdo mês " + gerenciador.GetTotalBonificacao());
         }
     }
 }
